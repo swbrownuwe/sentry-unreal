@@ -58,6 +58,7 @@ protected:
 	virtual void ConfigureCertsPath(sentry_options_t* Options) {}
 	virtual void ConfigureLogFileAttachment(sentry_options_t* Options) {}
 	virtual void ConfigureScreenshotAttachment(sentry_options_t* Options) {}
+	virtual void ConfigureAdditionalAttachment(sentry_options_t* Options, const FString Path) {}
 	virtual void ConfigureGpuDumpAttachment(sentry_options_t* Options) {}
 
 	FString GetHandlerPath() const;

@@ -65,6 +65,11 @@ void FLinuxSentrySubsystem::ConfigureScreenshotAttachment(sentry_options_t* Opti
 	sentry_options_add_attachment(Options, TCHAR_TO_UTF8(*GetScreenshotPath()));
 }
 
+void FLinuxSentrySubsystem::ConfigureAdditionalAttachment(sentry_options_t* Options, const FString Path)
+{
+	sentry_options_add_attachmentw(Options, TCHAR_TO_UTF8(*FPaths::ConvertRelativePathToFull(Path)));
+}
+
 void FLinuxSentrySubsystem::ConfigureGpuDumpAttachment(sentry_options_t* Options)
 {
 	sentry_options_add_attachment(Options, TCHAR_TO_UTF8(*GetGpuDumpBackupPath()));

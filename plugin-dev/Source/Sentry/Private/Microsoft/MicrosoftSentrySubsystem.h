@@ -18,6 +18,7 @@ protected:
 	virtual void ConfigureDatabasePath(sentry_options_t* Options) override;
 	virtual void ConfigureLogFileAttachment(sentry_options_t* Options) override;
 	virtual void ConfigureScreenshotAttachment(sentry_options_t* Options) override;
+	virtual void ConfigureAdditionalAttachment(sentry_options_t* Options, const FString Path) override;
 };
 
 #endif // USE_SENTRY_NATIVE
