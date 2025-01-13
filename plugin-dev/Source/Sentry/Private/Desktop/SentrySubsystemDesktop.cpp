@@ -190,14 +190,23 @@ void SentrySubsystemDesktop::InitWithSettings(const USentrySettings* settings, U
 
 	sentry_options_t* options = sentry_options_new();
 
+	TArray<FString> Attachments;
+	for (const FString& Attachment: settings->AdditionalAttachments)
+	{
+		Attachments.Add(Attachment);
+	}
 	if(settings->EnableAutoLogAttachment)
 	{
 		const FString LogFilePath = FGenericPlatformOutputDevices::GetAbsoluteLogFilename();
+		Attachments.Add(LogFilePath);
+	}
 
+	for (const FString& Attachment: Attachments)
+	{
 #if PLATFORM_WINDOWS
-		sentry_options_add_attachmentw(options, *FPaths::ConvertRelativePathToFull(LogFilePath));
+		sentry_options_add_attachmentw(options, *FPaths::ConvertRelativePathToFull(Attachment));
 #elif PLATFORM_LINUX
-		sentry_options_add_attachment(options, TCHAR_TO_UTF8(*FPaths::ConvertRelativePathToFull(LogFilePath)));
+		sentry_options_add_attachment(options, TCHAR_TO_UTF8(*FPaths::ConvertRelativePathToFull(Attachment)));
 #endif
 	}
 
