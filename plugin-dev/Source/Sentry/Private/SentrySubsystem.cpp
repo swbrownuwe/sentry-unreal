@@ -21,6 +21,7 @@
 #include "Engine/World.h"
 #include "GenericPlatform/GenericPlatformDriver.h"
 #include "GenericPlatform/GenericPlatformMisc.h"
+#include "HAL/MallocBinnedCommon.h"
 #include "Misc/App.h"
 #include "Misc/AssertionMacros.h"
 #include "Misc/CoreDelegates.h"
@@ -59,6 +60,16 @@ void USentrySubsystem::Deinitialize()
 
 void USentrySubsystem::Initialize()
 {
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("DamageAllocator"),
+		TEXT("Simulates allocator corruption."),
+		FConsoleCommandDelegate::CreateLambda([]()
+		{
+			FMallocBinnedCommonBase::Crash = true;
+		})
+	);
+
 	check(SubsystemNativeImpl);
 
 	if (!SubsystemNativeImpl)
