@@ -84,4 +84,9 @@ void FMicrosoftSentrySubsystem::AddByteAttachment(TSharedPtr<ISentryAttachment> 
 	attachments.Add(platformAttachment);
 }
 
+void FMicrosoftSentrySubsystem::ConfigureAdditionalAttachment(sentry_options_t* Options, const FString Path)
+{
+	sentry_options_add_attachmentw(Options, *FPaths::ConvertRelativePathToFull(Path));
+}
+
 #endif // USE_SENTRY_NATIVE

@@ -16,6 +16,7 @@ public:
 protected:
 	virtual void ConfigureDatabasePath(sentry_options_t* Options) override;
 	virtual void ConfigureLogFileAttachment(sentry_options_t* Options) override;
+	virtual void ConfigureAdditionalAttachment(sentry_options_t* Options, const FString Path) override;
 
 	virtual void AddFileAttachment(TSharedPtr<ISentryAttachment> attachment) override;
 	virtual void AddByteAttachment(TSharedPtr<ISentryAttachment> attachment) override;

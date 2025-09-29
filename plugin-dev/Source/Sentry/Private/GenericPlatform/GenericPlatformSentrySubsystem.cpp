@@ -307,6 +307,11 @@ void FGenericPlatformSentrySubsystem::InitWithSettings(const USentrySettings* se
 		ConfigureLogFileAttachment(options);
 	}
 
+	for (const FString& Attachment: settings->AdditionalAttachments)
+	{
+		ConfigureAdditionalAttachment(options, Attachment);
+	}
+
 	switch (settings->DatabaseLocation)
 	{
 	case ESentryDatabaseLocation::ProjectDirectory:
